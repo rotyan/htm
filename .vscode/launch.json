@@ -1,0 +1,37 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "pwa-chrome",
+            "request": "launch",
+            "name": "Launch Chrome against localhost",
+            "url": "http://localhost:8080",
+            // 这里需要注意的是Debugger for Chrom 默认生成的lanuch.json文件
+            // 中，只指定了url访问路径， 如果你的项目未发布到本地web服务器当
+            // 中，则无法通过配置的url路径访问html页面，
+            // 因此只能通过file属性指定首页文件访问
+
+            // 或者将项目目录放到web服务器目录下，配置正确的url去访问，例如将helloword工程放到apache服务器的htdocs目录下，在launch.json文件中 指定正确的url访问路径
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+        "name": "使用本机 Chrome 调试",
+            "type": "chrome",
+            "request": "launch",
+             "file": "${workspaceRoot}/index.html",
+        //  "url": "http://mysite.com/index.html", //使用外部服务器时,请注释掉 file, 改用 url, 并将 useBuildInServer 设置为 false "http://mysite.com/index.html
+            "runtimeExecutable": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe", // 改成您的 Chrome 安装路径
+            "sourceMaps": true,
+            "webRoot": "${workspaceRoot}",
+        //  "preLaunchTask":"build",
+            "userDataDir":"${tmpdir}",
+            "port":5433
+        }
+    ]
+}
+
+// PS：这种方法只适合普通页面，要是你的js项目里，包含json等游览器不支持本地游览的资源，那么就需要开启服务器，配合这个插件，才能进行断点调试。
+
