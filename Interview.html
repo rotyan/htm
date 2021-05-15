@@ -1,0 +1,113 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        <title></title>
+        <!-- 对外部js文件的引用,先定义标签，在调用相关标签或者操作相关标签，意味着对外部js的引用，一定要放在标签声明之后 -->
+        <script type="text/javascript" src="LR_swtich.js"></script>
+
+        <style>
+            .nav {
+                overflow: hidden;
+                text-align: center;
+                background-color: #f4f4f4;
+            }
+            .nav li {
+                float: left;
+                padding: 5px;
+                width: 80px;
+                color: #666;
+                list-style: none;
+                border-left: 1px solid #f4f4f4;
+                cursor: pointer;
+            }
+            .nav li:hover,.selected {
+                background-color:#ecebeb;
+                border-left: 1px solid #ecebeb;
+            }
+            .content{
+                border: 1px solid #f4f4f4;
+                height: 600px;
+                padding: 10px;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <ul class="nav">
+            <li class="selected">姓名</li>
+            <li>技术水平</li>
+            <li>技术经历</li>
+            <li>未来展望</li>
+        </ul>
+
+        <!-- div与p均独占一行的块元素标签，唯一区别，
+            p自带有一定 margin-top 和margin-bottom属性值，
+            而div两个属性值为0，也就是两个p之间有一定间距，而div没有。 -->
+
+        <div class="content">
+            <div class="list ">
+                <p>姓名：</p>
+                <p>&nbsp;&nbsp;&nbsp;黄英龙</p>
+            </div>
+            <div  class="list">
+                <p>技术水平：</p>
+                <p>&nbsp;&nbsp;&nbsp;22</p>
+            </div>
+            <div  class="list">
+                <p>技术经历：</p>
+                <p>
+                    <p>小学二年级家里有了第一台电脑，当时还是用着机械硬盘、开机1分半、又大又重的带光驱铁机箱。慢慢到三年级的时候这电脑经常蓝屏，于是就自学会了拆机，清理内存条、换风扇、清灰等基本操作。
+                        对硬件产生了点兴趣。
+                    </p>
+                     <p>在高中由于封闭式管理和领导们见电子就收，只能纸上谈兵空想下过过瘾。
+                         但是对各种环境、编译原理等等，直到大学系统学习了点才略知一二。    
+                    </p>
+                    <p>在大学学习了一些基础对数据分析、信号处理方面的知识，终于真正用上了之前所学的程序技能。这些东西有的涉及到机器学习、仿真的东西比较多，所以我主要用的是Python、R以及一些像Stata、Eviews之类的计量软件。</p>
+                    <p>还折腾过黑苹果，捡垃圾装系统，最近还捡了一部14年的MBP在宿舍服役。现在这些字都是用它码出来的。
+                        之前大二玩过路由，弄过老毛子系统，了解基本的组网的知识。还通过各种折腾，用上了校园网的IPv6，通过西工大的蒲公英下载速度挺快，种子也挺多。
+                        之前试过建造个人网站。开始的想法是放在Github Pages，但由于部署比较麻烦，关键是多少东西（懒），最后就放下来了。</p>
+                </p>
+            </div>
+            <div  class="list">
+                <p>未来展望：</p>
+                <p>&nbsp;&nbsp;&nbsp;
+                    <h2>
+                        <a href="尘埃的博客.html">merelydust</a>
+                    </h2>
+                    <h2>
+                        <a href="关于 - HHz.html">HHz</a>
+                    </h2>
+                </p>
+            </div>
+        </div>
+
+        <!-- 写三个切换标签，定位好，
+            然后再在下面写三个div，每个div包含一个标签的内容，
+            默认第一个显示，其他两个隐藏，然后通过js来移动到第一个标签上显示第一个div的内容，
+            后面一样 -->
+
+        <script>
+                $(function(){
+                    //获取点击事件的对象
+                    $(".nav li").click(function(){
+                        //获取要显示或隐藏的对象
+                        var divShow = $(".content").children('.list');
+                        //判断当前对象是否被选中，如果没选中的话进入if循环
+                        if (!$(this).hasClass('selected')) {
+                            //获取当前对象的索引
+                            var index = $(this).index();
+                            //当前对象添加选中样式并且其同胞移除选中样式；
+                            $(this).addClass('selected').siblings('li').removeClass('selected');
+                            //索引对应的div块显示
+                            $(divShow[index]).show();
+                            //索引对应的div块的同胞隐藏
+                            $(divShow[index]).siblings('.list').hide();
+                        }
+                    });
+                });
+        </script>
+
+    </body>
+    </html>
